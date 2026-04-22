@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Neway - Bilhetagem Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-width: 320px;
+            margin: 0;
+            padding: 20px;
+        }
+
+        :root {
+            --azul: #0040e0;
+        }
+
+        .ticket-container {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        header h1 {
+            color: #222;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        legend {
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--azul);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--azul);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #002fa3;
+        }
+
+        header img {
+            max-width: 169px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #000;
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 460px) {
+            .grid-row {
+                /* Muda de 2 colunas para apenas 1 */
+                grid-template-columns: 1fr; 
+                /* Diminui o espaço entre os campos empilhados */
+                gap: 10px; 
+            }
+
+            .ticket-container {
+                /* Reduz um pouco o respiro interno para sobrar mais espaço para os campos */
+                padding: 20px; 
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="ticket-container">
+    <header>
+        <img src="https://i.ibb.co/vCshSBsR/neway-logo-azul.png" alt="Logo da Neway" draggable="false">
+        <h1>
+            Bilhetagem Online
+        </h1>
+    </header>
+
+    <form>
+        <fieldset>
+            <legend>Seleção de Rota</legend>
+            <div class="grid-row">
+                <div class="field">
+                    <label for="origem">Origem</label>
+                    <select id="origem">
+                        <option>Las Venturas</option>
+                        <option>San Fierro</option>
+                        <option>Bayside</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="destino">Destino</label>
+                    <select id="destino">
+                        <option>San Fierro</option>
+                        <option>Las Venturas</option>
+                        <option>Los Santos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="field">
+                    <label for="data-viagem">Data da Viagem</label>
+                    <input type="date" id="data-viagem">
+                </div>
+                <div class="field">
+                    <label for="horario-embarque">Horário</label>
+                    <select id="horario-embarque">
+                        <option>08:00 (Direto)</option>
+                        <option>14:30 (Escalas)</option>
+                        <option>22:00 (Leito)</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Identificação</legend>
+            <div class="field">
+                <label for="passageiro-nome">Nome do Passageiro</label>
+                <input id="passageiro-nome" type="text" placeholder="Ex: Carl Johnson">
+            </div>
+            <div class="grid-row">
+                <div class="field">
+                    <label for="passageiro-doc">Documento</label>
+                    <input id="passageiro-doc" type="text" placeholder="ID / Passaporte">
+                </div>
+                <div class="field">
+                    <label for="poltrona">Poltrona Preferencial</label>
+                    <input id="poltrona" type="number" min="1" max="42" placeholder="Ex: 12">
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn-submit">RESERVAR PASSAGEM</button>
+    </form>
+</div>
+
+<footer>
+    Desenvolvido por <a href="https://github.com/robsonnslima">Robson Lima</a>.
+</footer>
+</body>
+</html>
